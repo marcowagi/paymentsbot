@@ -47,8 +47,8 @@ class User(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     # Relationships
-    requests = relationship("Request", back_populates="user")
-    complaints = relationship("Complaint", back_populates="user")
+    requests = relationship("Request", back_populates="user", foreign_keys="Request.user_id")
+    complaints = relationship("Complaint", back_populates="user", foreign_keys="Complaint.user_id")
     admin_roles = relationship("AdminRole", back_populates="user")
     audit_logs = relationship("AuditLog", back_populates="actor_user", foreign_keys="AuditLog.actor_user_id")
 
