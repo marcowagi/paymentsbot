@@ -31,7 +31,7 @@
   "enter_destination": "Enter destination address:",
   "request_submitted": "Your request has been submitted successfully and is under review",
   "complaint_text": "Please write your complaint:",
-  "complaint_submitted": "Your complaint has been submitted successfully and will be answered soon",
+  "complaint_submitted": "Your complaint has been submitted successfully!\n\nTicket Number: {complaint_id}\nStatus: Pending Review\n\nYou will receive a response soon.",
   "guest_restriction": "Sorry, this feature is available for registered members only. Please register first.",
   "admin_panel": "Admin Panel",
   "pending_requests": "Pending requests: {count}",

@@ -31,7 +31,7 @@
   "enter_destination": "أدخل عنوان الوجهة:",
   "request_submitted": "تم تقديم طلبك بنجاح وهو قيد المراجعة",
   "complaint_text": "يرجى كتابة شكواك:",
-  "complaint_submitted": "تم تقديم شكواك بنجاح وسيتم الرد عليها قريباً",
+  "complaint_submitted": "تم تقديم شكواك بنجاح!\n\nرقم التذكرة: {complaint_id}\nالحالة: في انتظار المراجعة\n\nسيتم الرد عليك قريباً.",
   "guest_restriction": "عذراً، هذه الميزة متاحة للأعضاء المسجلين فقط. يرجى التسجيل أولاً.",
   "admin_panel": "لوحة التحكم",
   "pending_requests": "الطلبات المعلقة: {count}",
