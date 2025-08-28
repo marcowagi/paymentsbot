@@ -1,0 +1,10 @@
+setting_key,setting_value,description
+support_phone,+201284465811,رقم هاتف الدعم الفني
+support_email,support@dux.com,بريد الدعم الإلكتروني
+company_name,DUX,اسم الشركة
+min_deposit,50,أقل مبلغ إيداع مسموح
+min_withdrawal,100,أقل مبلغ سحب مسموح
+max_daily_withdrawal,10000,أقصى مبلغ سحب يومي
+support_hours,24/7,ساعات عمل الدعم
+welcome_message,مرحباً بك في نظام DUX المالي المتقدم,رسالة الترحيب
+support_telegram,@DUX_support,حساب التليجرام للدعم
