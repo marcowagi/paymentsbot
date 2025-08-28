@@ -10,7 +10,7 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from sqlalchemy.ext.asyncio import AsyncSession
-from models import Ad
+from models import Announcement
 from services.broadcast_service import BroadcastService
 from utils.keyboards import get_cancel_keyboard
 from config import ADMINS

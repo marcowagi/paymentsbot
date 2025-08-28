@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import List, Dict, Any
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, text
-from models import User, Company, PaymentMethod, Request, Complaint, Ad
+from models import User, Company, PaymentMethod, Request, Complaint, Announcement
 from config import REPORTS_DIR
 
 logger = logging.getLogger(__name__)
