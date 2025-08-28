@@ -30,6 +30,23 @@ async def main():
     try:
         logger.info("Starting Telegram Finance Bot...")
         
+        # Initialize database
+        await init_db()
+        
+        # Clear temporary admins on restart
+        from models import User
+        session_maker = SessionMaker()
+        async with session_maker() as session:
+            from sqlalchemy import update
+            await session.execute(
+                update(User).where(User.is_temporary_admin == True).values(
+                    is_admin=False,
+                    is_temporary_admin=False
+                )
+            )
+            await session.commit()
+            logger.info("Cleared temporary admins on restart")
+        
         # Initialize bot and dispatcher
         bot = Bot(token=BOT_TOKEN)
         dp = Dispatcher(storage=MemoryStorage())

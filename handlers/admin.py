@@ -583,4 +583,54 @@ async def process_user_id_handler(message: Message, state: FSMContext, session: 
         await message.answer(_("error"))
         await state.clear()
 
+@router.message(Command("clear_temp_admins"))
+async def clear_temp_admins_handler(message: Message, session: AsyncSession):
+    """Clear all temporary admins - only for super admins"""
+    try:
+        user_id = message.from_user.id
+        
+        if not is_super_admin(user_id):
+            await message.answer(_("unauthorized"))
+            return
+        
+        # Get admin's language preference
+        result = await session.execute(
+            select(User).where(User.telegram_id == user_id)
+        )
+        admin_user = result.scalar_one_or_none()
+        lang = admin_user.language if admin_user else "ar"
+        
+        # Get temporary admins count before removal
+        temp_admins_result = await session.execute(
+            select(func.count(User.id)).where(User.is_temporary_admin == True)
+        )
+        temp_admins_count = temp_admins_result.scalar()
+        
+        if temp_admins_count == 0:
+            await message.answer("لا توجد مدراء مؤقتين / No temporary admins found" if lang == "ar" else "No temporary admins found")
+            return
+        
+        # Clear temporary admins
+        from sqlalchemy import update
+        await session.execute(
+            update(User).where(User.is_temporary_admin == True).values(
+                is_admin=False,
+                is_temporary_admin=False
+            )
+        )
+        await session.commit()
+        
+        # Log action
+        await log_admin_action(
+            session, "clear_temp_admins", user_id, None, 
+            f"Cleared {temp_admins_count} temporary admins"
+        )
+        
+        success_msg = f"تم إزالة {temp_admins_count} مدراء مؤقتين" if lang == "ar" else f"Removed {temp_admins_count} temporary admins"
+        await message.answer(success_msg)
+        
+    except Exception as e:
+        logger.error(f"Error in clear temp admins handler: {e}")
+        await message.answer(_("error"))
+
 # Additional admin commands will be handled by other handlers (companies, broadcast, etc.)
